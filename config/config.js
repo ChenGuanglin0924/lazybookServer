@@ -15,6 +15,6 @@ module.exports = {
     dataTables: {
         session: 'session',
         user: 'user',
-        books: 'books'
+        bill: 'bill'
     }
   };

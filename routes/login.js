@@ -30,20 +30,20 @@ router.get('/login', function(req, res) {
       const skey = sha1(sessionKey);
       const sessionData = {
         skey,
-        create_time: currentTime,
-        last_login_time: currentTime,
-        session_key: sessionKey
+        createTime: currentTime,
+        lastLoginTime: currentTime,
+        sessionKey
       }
 
-      mysql(config.dataTables.session).select('open_id').where({
-        open_id: openId
+      mysql(config.dataTables.session).select('openID').where({
+        openID: openId
       }).then(arg2 => {
-        if (arg2[0] && arg2[0].open_id) {
+        if (arg2[0] && arg2[0].openID) {
           return mysql(config.dataTables.session).update(sessionData).where({
-            open_id: openId
+            openID: openId
           })
         } else {
-          sessionData.open_id = openId;
+          sessionData.openID = openId;
           return mysql(config.dataTables.session).insert(sessionData);
         }
       }).then(() => {

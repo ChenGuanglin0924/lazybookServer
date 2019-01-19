@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const config = require('./config/config');
 const loginRouter = require('./routes/login');
 const userRouter = require('./routes/user');
+const billRouter = require('./routes/bill');
 const app = express();
 const port = config.port;
 
@@ -20,12 +21,12 @@ app.get(config.root, function(req, res, next) {
 })
 app.use(config.root, loginRouter);
 app.use(config.root, userRouter);
+app.use(config.root, billRouter);
 
 app.use(function(req, res, next) {
     res.status(404).json({
         error: '资源未找到'
     });
-
 });
 
 app.use(function(error, req, res, next) {

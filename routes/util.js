@@ -31,7 +31,7 @@ const loginCheckMiddleware = function (req, res, next) {
     // return;
     if (arg1.length > 0) {
       const session = arg1[0];
-      const lastLoginTime = session.last_login_time;  //上次登录时间
+      const lastLoginTime = session.lastLoginTime;  //上次登录时间
       const expireTime = config.expireTime * 1000;  //过期时间
       if (moment(lastLoginTime, 'YYYY-MM-DD HH:mm:ss').valueOf() + expireTime > +new Date) {
         req.session = session;
