@@ -24,14 +24,14 @@ router.get('/bill', function(req, res, next) {
     // };
     mysql(config.dataTables.bill).select('*').where({
       openID: req.session.openID
-    }).limit(pageSize).offset((page - 1) * pageSize).orderByRaw('date desc, time asc').then(function(arg) {
-        if (arg.length > 0) {
-          res.json(arg);
-          } else {
-            res.status(400).json({
-              error: '数据不存在'
-            });
-          }
+    }).orderByRaw('date desc, time desc, id desc').limit(pageSize).offset((page - 1) * pageSize).then(function(arg) {
+      // if (arg.length > 0) {
+        res.json(arg);
+      // } else {
+      //   res.status(400).json({
+      //     error: '数据不存在'
+      //   });
+      // }
     })
 })
 
