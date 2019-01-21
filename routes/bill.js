@@ -17,14 +17,14 @@ router.all('*', function (req, res, next) {
 });
 
 router.get('/bill', function(req, res, next) {
-    const page = req.query.page,
+    const currentPage = req.query.currentPage,
       pageSize = req.query.pageSize;
     // let condition = {
     //   openID: req.session.openID
     // };
     mysql(config.dataTables.bill).select('*').where({
       openID: req.session.openID
-    }).orderByRaw('date desc, time desc, id desc').limit(pageSize).offset((page - 1) * pageSize).then(function(arg) {
+    }).orderByRaw('date desc, time desc, id desc').limit(pageSize).offset((currentPage - 1) * pageSize).then(function(arg) {
       // if (arg.length > 0) {
         res.json(arg);
       // } else {
