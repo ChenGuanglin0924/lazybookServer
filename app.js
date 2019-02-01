@@ -4,8 +4,8 @@ const config = require('./config/config');
 const loginRouter = require('./routes/login');
 const userRouter = require('./routes/user');
 const billRouter = require('./routes/bill');
+const uploadRouter = require('./routes/upload');
 const app = express();
-const port = config.port;
 
 //静态资源引用
 app.use('/resources', express.static('public'));
@@ -22,6 +22,7 @@ app.get(config.root, function(req, res, next) {
 app.use(config.root, loginRouter);
 app.use(config.root, userRouter);
 app.use(config.root, billRouter);
+app.use(config.root, uploadRouter);
 
 app.use(function(req, res, next) {
     res.status(404).json({
