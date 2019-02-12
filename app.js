@@ -1,4 +1,6 @@
 const express = require('express');
+const https = require('https');
+const fs = require('fs');
 const bodyParser = require('body-parser');
 const config = require('./config/config');
 const loginRouter = require('./routes/login');
@@ -6,6 +8,12 @@ const userRouter = require('./routes/user');
 const billRouter = require('./routes/bill');
 const uploadRouter = require('./routes/upload');
 const app = express();
+
+// https SSL证书
+const options = {
+    pfx: fs.readFileSync('cert/GarasChan.pfx'),
+    passphrase: '983dIMDA'
+};
 
 //静态资源引用
 app.use('/resources', express.static('public'));
@@ -37,11 +45,11 @@ app.use(function(error, req, res, next) {
     });
 });
 
-app.listen(config.port, function(error) {
+https.createServer(options, app).listen(config.port, function(error) {
     if(error) {
         console.log('error!');
     }
     else {
         console.log(`Express start at port ${config.port}`);
     }
-});
+})
