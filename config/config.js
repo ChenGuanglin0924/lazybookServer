@@ -1,4 +1,5 @@
-module.exports = {
+var config = {
+    host: 'https://www.garaschan.online',
     root: '/lazybook/wx',
     port: 4290,
     //过期时间，秒
@@ -17,4 +18,6 @@ module.exports = {
         user: 'user',
         bill: 'bill'
     }
-  };
+}
+
+module.exports = config;

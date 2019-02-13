@@ -17,8 +17,6 @@ router.all('*', function (req, res, next) {
 });
 
 router.get('/user', (req, res) => {
-  // res.json(req.session);
-  // return;
   mysql(config.dataTables.user).select('*').where({
     openID: req.session.openID
   }).then(function (arg) {
@@ -75,7 +73,7 @@ router.put('/user', function (req, res, next) {
   mysql(config.dataTables.user).update(userInfo).where({
     openID: req.session.openID
   }).then(function () {
-    res.json(userInfo);
+    res.json({ success: true });
   });
 });
 

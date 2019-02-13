@@ -32,7 +32,10 @@ router.post('/upload', upload.single('avatar'), function(req, res, next) {
     mysql(config.dataTables.user).update({ avatar: name }).where({ 
         openID: req.session.openID
     }).then(function(arg) {
-        res.json({ success: true });
+        res.json({ 
+            success: true,
+            name
+        });
     }).catch(function(err) {
         res.json({ err });
     })
