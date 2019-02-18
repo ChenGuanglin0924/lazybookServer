@@ -7,6 +7,8 @@ const loginRouter = require('./routes/login');
 const userRouter = require('./routes/user');
 const billRouter = require('./routes/bill');
 const uploadRouter = require('./routes/upload');
+const statisticsRouter = require('./routes/statistics');
+
 const app = express();
 
 // https SSL证书
@@ -31,6 +33,7 @@ app.use(config.root, loginRouter);
 app.use(config.root, userRouter);
 app.use(config.root, billRouter);
 app.use(config.root, uploadRouter);
+app.use(config.root, statisticsRouter);
 
 app.use(function(req, res, next) {
     res.status(404).json({
@@ -45,7 +48,7 @@ app.use(function(error, req, res, next) {
     });
 });
 
-https.createServer(options, app).listen(config.port, function(error) {
+app.listen(config.port, function(error) {
     if(error) {
         console.log('error!');
     }
@@ -53,3 +56,12 @@ https.createServer(options, app).listen(config.port, function(error) {
         console.log(`Express start at port ${config.port}`);
     }
 })
+
+// https.createServer(options, app).listen(config.port, function(error) {
+//     if(error) {
+//         console.log('error!');
+//     }
+//     else {
+//         console.log(`Express start at port ${config.port}`);
+//     }
+// })
