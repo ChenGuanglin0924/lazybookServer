@@ -37,13 +37,14 @@ app.use(config.root, statisticsRouter);
 
 app.use(function(req, res, next) {
     res.status(404).json({
+        status: 404,
         error: '资源未找到'
     });
 });
 
 app.use(function(error, req, res, next) {
-    console.log(error);
     res.status(500).json({
+        status: 500,
         error: '服务器内部错误'
     });
 });
